@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Window_settings {
 	
-	private static String FrameName = "Call of Sudoku";
+	private static String FrameName = "Sudoku";
 	//Changes Tab Icon and Name
 	public static void Tab(JFrame frame) {
 		ImageIcon ff = new ImageIcon("img/Firefighter-amico.png");
