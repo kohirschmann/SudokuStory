@@ -249,7 +249,7 @@ public class SudokuUI_4x4{
     setGridColors();
     updateGridColors();
     
-    Sound_test.play("src/output2.wav");
+    Sound_test.play("src/rain.wav");
 
 
     int[][] sudokuPuzzle = Sudoku_generator_4x4.sudokuGenerator();
