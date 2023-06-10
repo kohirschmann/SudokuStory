@@ -281,12 +281,15 @@ private void updateTimerLabel() {
     }
 }
 private void setGridColors() {
-    Color[] colors = { Color.WHITE, Color.LIGHT_GRAY,Color.LIGHT_GRAY,Color.WHITE};
+    String[] colorCodes = {"#65B952", "#2B70AA", "#2B70AA", "#65B952"};
+
     int gridIndex = 0;
     for (int i = 0; i < GRID_SIZE; i += 2) {
         for (int j = 0; j < GRID_SIZE; j += 2) {
-            Color color = colors[gridIndex % colors.length];
+            String colorCode = colorCodes[gridIndex % colorCodes.length];
             gridIndex++;
+
+            Color color = Color.decode(colorCode);
 
             for (int row = i; row < i + 2; row++) {
                 for (int col = j; col < j + 2; col++) {
@@ -296,6 +299,7 @@ private void setGridColors() {
         }
     }
 }
+
 private void setCellFormatting(JTextField textField) {
     Font font = textField.getFont();
     Font largerBoldFont = font.deriveFont(font.getSize() + 16f).deriveFont(Font.BOLD);

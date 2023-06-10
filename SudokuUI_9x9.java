@@ -413,24 +413,25 @@ public class SudokuUI_9x9 {
         	hoursPassed ++;
         }
     }
-    private void setGridColors() {
-        Color[] colors = { Color.WHITE, Color.LIGHT_GRAY };
-       
-        
-        int gridIndex = 0;
-        for (int i = 0; i < GRID_SIZE; i += 3) {
-            for (int j = 0; j < GRID_SIZE; j += 3) {
-                Color color = colors[gridIndex % colors.length];
-                gridIndex++;
+   private void setGridColors() {
+   	String[] colorCodes = {"#65B952", "#2B70AA"};
+	int gridIndex = 0;
+    	for (int i = 0; i < GRID_SIZE; i += 3) {
+       		for (int j = 0; j < GRID_SIZE; j += 3) {
+            		String colorCode = colorCodes[gridIndex % colorCodes.length];
+            		gridIndex++;
 
-                for (int row = i; row < i + 3; row++) {
-                    for (int col = j; col < j + 3; col++) {
-                        gridColors[row][col] = color;
-                    }
+            		Color color = Color.decode(colorCode);
+
+            		for (int row = i; row < i + 3; row++) {
+                		for (int col = j; col < j + 3; col++) {
+                    			gridColors[row][col] = color;
                 }
             }
         }
     }
+}
+
     private void setCellFormatting(JTextField textField) {
         Font font = textField.getFont();
         Font largerBoldFont = font.deriveFont(font.getSize() + 8f).deriveFont(Font.BOLD);
