@@ -1,12 +1,19 @@
 
 import java.util.Random;
-
+/**
+ * This class provides a method for generating a valid 9x9 Sudoku puzzle (medium mode).
+ */
 public class Sudoku_generator_medium {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
+	/**
+     * Generates a 9x9 Sudoku puzzle (easy mode).
+     * The puzzle is initially filled with twenty five random numbers at random locations,
+     * ensuring that each number is valid at its location. The puzzle is then solved
+     * to check if it's valid. If it is, the puzzle with the initial thirty five numbers is returned.(retrieved from the solved puzzle)
+     * If it's not valid, the process repeats until a valid puzzle is generated.
+     *
+     * @return A 9x9 Sudoku puzzle (easy mode) represented as a 2D integer array.
+     */
 	public static int [][] sudokuGenerator() {
 			int[][] array1 = new int[9][9];
 	        int[][] array2 = new int[9][9];
@@ -44,19 +51,5 @@ public class Sudoku_generator_medium {
 	            	return array2;
 	            }
 	        }
-	    }
-	public static void printSudoku(int[][] sudoku) {
-		for (int i = 0; i < 9; i++) {
-			if (i % 3 == 0 && i != 0) {
-				System.out.println("- - - - - - - - - - - -");
-			}
-			for (int j = 0; j < 9; j++) {
-				if (j % 3 == 0 && j != 0) {
-					System.out.print(" | ");
-				}
-				System.out.print(sudoku[i][j] + " ");
-			}
-			System.out.println();
-		}
 	}
 }

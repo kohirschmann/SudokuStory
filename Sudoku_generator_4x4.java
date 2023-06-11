@@ -1,18 +1,17 @@
 import java.util.Random;
-
+/**
+ * This class provides a method for generating a valid 4x4 Sudoku puzzle.
+ */
 public class Sudoku_generator_4x4 {
-
-    public static void main(String[] args) {
-        int[][] generatedSudoku = sudokuGenerator();
-        printSudoku(generatedSudoku);
-        System.out.println("");
-        System.out.println("");
-        if (Sudoku_solver_4x4.solve_sudoku(generatedSudoku)) {
-        	printSudoku(generatedSudoku);
-        }
-        	
-    }
-    
+	 /**
+     * Generates a 4x4 Sudoku puzzle.
+     * The puzzle is initially filled with five random numbers at random locations,
+     * ensuring that each number is valid at its location. The puzzle is then solved
+     * to check if it's valid. If it is, the puzzle with the initial five numbers is returned.
+     * If it's not valid, the process repeats until a valid puzzle is generated.
+     *
+     * @return A 4x4 Sudoku puzzle represented as a 2D integer array.
+     */
     public static int[][] sudokuGenerator() {
         int[][] array1 = new int[4][4];
         int[][] array2 = new int[4][4];
@@ -40,21 +39,6 @@ public class Sudoku_generator_4x4 {
             if (Sudoku_solver_4x4.solve_sudoku(array2)) {
                 return array1;
             }
-        }
-    }
-
-    public static void printSudoku(int[][] sudoku) {
-        for (int i = 0; i < 4; i++) {
-            if (i % 2 == 0 && i != 0) {
-                System.out.println("- - - - - -");
-            }
-            for (int j = 0; j < 4; j++) {
-                if (j % 2 == 0 && j != 0) {
-                    System.out.print(" | ");
-                }
-                System.out.print(sudoku[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 }

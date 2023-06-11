@@ -1,7 +1,17 @@
 import java.util.Random;
-
+/**
+ * This class provides a method for generating a valid 9x9 Sudoku puzzle (hard mode).
+ */
 public class Sudoku_generator_hard {
-
+	/**
+     * Generates a 9x9 Sudoku puzzle (hard mode).
+     * The puzzle is initially filled with twenty five random numbers at random locations,
+     * ensuring that each number is valid at its location. The puzzle is then solved
+     * to check if it's valid. If it is, the puzzle with the initial twenty five numbers is returned.
+     * If it's not valid, the process repeats until a valid puzzle is generated.
+     *
+     * @return A 9x9 Sudoku puzzle (hard mode) represented as a 2D integer array.
+     */
     public static void main(String[] args) {
         int[][] generatedSudoku = sudokuGenerator();
         printSudoku(generatedSudoku);

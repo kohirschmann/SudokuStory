@@ -6,21 +6,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 
 public class SudokuUI_9x9 {
     private static final int GRID_SIZE = 9;
     private JTextField[][] fields = new JTextField[GRID_SIZE][GRID_SIZE];
-    private int regenerateCount = 0;
     private Color[][] gridColors = new Color[GRID_SIZE][GRID_SIZE];
     private Timer timer;
     private int secondsPassed;
     private JLabel timerLabel;
     private int minutesPassed;
     private int hoursPassed;
-    private int difficulty_option;
     
     
     public static void main(String[] args) {
@@ -99,32 +94,13 @@ public class SudokuUI_9x9 {
                             solutionBoard[i] = board[i].clone();
                         }
                         if(Sudoku_solver.solve_sudoku(solutionBoard)) {
-                        	if(difficulty_option == 1) {
-                            float correctness = Sudoku_corrector.getCorrectness(board, solutionBoard,difficulty_option); 
-                            showCorrectnessDialog(correctness,board,solutionBoard);
+                       
                             resetGrid(); 
                             resettimer();
                             timer.start();
-                        	}
+                        	
                         }
-                        if(Sudoku_solver.solve_sudoku(solutionBoard)) {
-                        	if(difficulty_option == 2) {
-                            float correctness = Sudoku_corrector.getCorrectness(board, solutionBoard,difficulty_option); 
-                            showCorrectnessDialog(correctness,board,solutionBoard);
-                            resetGrid(); 
-                            resettimer();
-                            timer.start();
-                        	}
-                        }
-                        if(Sudoku_solver.solve_sudoku(solutionBoard)) {
-                        	if(difficulty_option == 3) {
-                            float correctness = Sudoku_corrector.getCorrectness(board, solutionBoard,difficulty_option); 
-                            showCorrectnessDialog(correctness,board,solutionBoard);
-                            resetGrid(); 
-                            resettimer();
-                            timer.start();
-                        	}
-                        }
+                      
                     }
                 } else {
                     int[][] solutionBoard = new int[GRID_SIZE][GRID_SIZE];
@@ -132,15 +108,12 @@ public class SudokuUI_9x9 {
                         solutionBoard[i] = board[i].clone();
                     }
                     if(Sudoku_solver.solve_sudoku(solutionBoard)) {
-                        float correctness = Sudoku_corrector.getCorrectness(board, solutionBoard,difficulty_option);
-                        if (correctness == 100.0) {
-                            JOptionPane.showMessageDialog(null, "Congratulations! Your solution is correct!");
+                     
+                            JOptionPane.showMessageDialog(null, "Congratulations! You completed!");
                             resetGrid(); 
                             resettimer();
                             timer.start();
-                        } else {
-                            showCorrectnessDialog(correctness,board,solutionBoard);
-                        }
+                       
                     }
                 }
             }
@@ -234,8 +207,8 @@ public class SudokuUI_9x9 {
         beginner.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	String [] options = {"Yes","No"};
-            	int result = JOptionPane.showOptionDialog(null, "Switch to 4x4?", 
+            	String [] options = {"Not so bad to be a cute baby!","OK...let me consider..."};
+            	int result = JOptionPane.showOptionDialog(null, "Serious? Baby Mode?", 
                         "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                         null, options, options[0]);
             	if (result == 0) {
@@ -251,8 +224,8 @@ public class SudokuUI_9x9 {
         easy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	String [] options = {"Yes, let's start this level!","No, stay here!"};
-            	int result = JOptionPane.showOptionDialog(null, "Switch to easy?", 
+            	String [] options = {"Yes, let's start this level!","OK...let me consider..."};
+            	int result = JOptionPane.showOptionDialog(null, "Any problems? Do you really want a new template?", 
                         "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                         null, options, options[0]);
             	if (result == 0) {
@@ -280,8 +253,8 @@ public class SudokuUI_9x9 {
         medium.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	String [] options = {"Yes, let's start this level!","No, stay here!"};
-            	int result = JOptionPane.showOptionDialog(null, "Switch to medium?", 
+            	String [] options = {"Yes, let's start this level!","OK...let me consider..."};
+            	int result = JOptionPane.showOptionDialog(null, "Any problems? Do you really want a new template?", 
                         "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                         null, options, options[0]);
             	if (result == 0) {
@@ -307,8 +280,8 @@ public class SudokuUI_9x9 {
         JButton hard = new JButton("Hard");
         hard.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {String [] options = {"Yes, let's start this level!","No, stay here!"};
-        	int result = JOptionPane.showOptionDialog(null, "Switch to hard?", 
+            public void actionPerformed(ActionEvent e) {String [] options = {"Yes, let's start this level!","OK...let me consider..."};
+        	int result = JOptionPane.showOptionDialog(null, "Any problems? Do you really want a new template?", 
                     "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                     null, options, options[0]);
         	if (result == 0) {
@@ -382,7 +355,7 @@ public class SudokuUI_9x9 {
         setGridColors();
         updateGridColors();
         
-        Sound_test.play("src/rain.wav");
+        Sound_test.play("src/output.wav");
 
 
         int[][] sudokuPuzzle = Sudoku_generator_hard.sudokuGenerator();
@@ -397,11 +370,6 @@ public class SudokuUI_9x9 {
         checkzero();
     }
 
-    private void showCorrectnessDialog(float correctness,int [][] board,int [][] solutionboard) {
-        correctness = Sudoku_corrector.getCorrectness(board, solutionboard, difficulty_option);
-        JOptionPane.showMessageDialog(null, "Your correctness: " + correctness + "%");
-    }
-
     private void updateTimerLabel() {
         timerLabel.setText("Time Passed: " + hoursPassed + " h " + minutesPassed+ " min " + secondsPassed + " s");
         if (secondsPassed == 60) {
@@ -413,25 +381,24 @@ public class SudokuUI_9x9 {
         	hoursPassed ++;
         }
     }
-   private void setGridColors() {
-   	String[] colorCodes = {"#65B952", "#2B70AA"};
-	int gridIndex = 0;
-    	for (int i = 0; i < GRID_SIZE; i += 3) {
-       		for (int j = 0; j < GRID_SIZE; j += 3) {
-            		String colorCode = colorCodes[gridIndex % colorCodes.length];
-            		gridIndex++;
+    private void setGridColors() {
+       	String[] colorCodes = {"#65B952", "#2B70AA"};
+    	int gridIndex = 0;
+        	for (int i = 0; i < GRID_SIZE; i += 3) {
+           		for (int j = 0; j < GRID_SIZE; j += 3) {
+                		String colorCode = colorCodes[gridIndex % colorCodes.length];
+                		gridIndex++;
 
-            		Color color = Color.decode(colorCode);
+                		Color color = Color.decode(colorCode);
 
-            		for (int row = i; row < i + 3; row++) {
-                		for (int col = j; col < j + 3; col++) {
-                    			gridColors[row][col] = color;
+                		for (int row = i; row < i + 3; row++) {
+                    		for (int col = j; col < j + 3; col++) {
+                        			gridColors[row][col] = color;
+                    }
                 }
             }
         }
     }
-}
-
     private void setCellFormatting(JTextField textField) {
         Font font = textField.getFont();
         Font largerBoldFont = font.deriveFont(font.getSize() + 8f).deriveFont(Font.BOLD);
