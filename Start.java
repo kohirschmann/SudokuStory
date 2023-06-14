@@ -1,12 +1,24 @@
+/**
+ * This class represents the main entry point of the StorySudoku game.
+ * It provides a graphical user interface (GUI) where the user can interact with the game.
+ * The GUI displays a welcome message, an explanation of the game, and level selection options.
+ * The user can choose a level and start a new game.
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class Start {
-
+    /**
+     * This nested class represents a user in the game.
+     * It provides functionality to change the user's username and retrieve the current username.
+     */
     static class User {
         static String username;
-
+        /**
+         * Prompts the user to enter their name and sets it as the username.
+         * Uses a dialog box to display the prompt.
+         */
         public static void changeUsername() {
             UIManager.put("OptionPane.background", Color.WHITE);
             UIManager.put("Panel.background", Color.WHITE);
@@ -17,14 +29,22 @@ public class Start {
             UIManager.put("OptionPane.background", null);
             UIManager.put("Panel.background", null);
         }
-
+        /**
+         * Retrieves the current username.
+         *
+         * @return The username of the user.
+         */
         public static String getName() {
             return username;
         }
     }
 
     static ImageIcon tigerImage = new ImageIcon("img/Tiger-only.png");
-
+    /**
+     * The main method that starts the game and initializes the graphical user interface.
+     *
+     * @param args The command-line arguments (not used).
+     */
     public static void main(String[] args) {
         User.changeUsername();
         JFrame frame = new JFrame(Window_settings.getFrameName());
