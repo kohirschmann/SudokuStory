@@ -1,13 +1,12 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 /**
  * This class represents the main entry point of the StorySudoku game.
  * It provides a graphical user interface (GUI) where the user can interact with the game.
  * The GUI displays a welcome message, an explanation of the game, and level selection options.
  * The user can choose a level and start a new game.
  */
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
 public class Start {
     /**
      * This nested class represents a user in the game.
@@ -20,9 +19,9 @@ public class Start {
          * Uses a dialog box to display the prompt.
          */
         public static void changeUsername() {
-            UIManager.put("OptionPane.background", new Color(160, 216, 144));
+            UIManager.put("OptionPane.background", new Color (160, 216, 144));
             UIManager.put("Panel.background", new Color (160, 216, 144));
-            ImageIcon ff = Scaling.Icon(new ImageIcon("img/Tiger_zoo_per.png"));
+            ImageIcon ff = Scaling.Icon(new ImageIcon("img/Tiger-only.png"));
             Object input = JOptionPane.showInputDialog(null, "Welcome, what is your name?", "Choose Username", JOptionPane.PLAIN_MESSAGE, ff, null, null);
             username = input.toString();
 
@@ -60,7 +59,6 @@ public class Start {
         });
         frame.setLayout(new BorderLayout());
 
-        // Greeting and Explanation
         JPanel greetingPanel = new JPanel();
         greetingPanel.setLayout(new BorderLayout());
         greetingPanel.setBackground(new Color(160, 216, 144));
@@ -79,29 +77,26 @@ public class Start {
 
         frame.add(greetingPanel, BorderLayout.NORTH);
 
-        // Level Selection
         JPanel levelPanel = new JPanel(new GridLayout(2, 5, 20, 20));
         levelPanel.setBackground(new Color(160, 216, 144));
         levelPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
-        // Button Images
         JPanel levelPanel1 = new JPanel(new GridLayout(2, 5, 20, 20));
         levelPanel1.setBackground(new Color(160, 216, 144));
         levelPanel1.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
-        // Button Images
-        ImageIcon image1 = new ImageIcon("img/Tiger-only.png");
-        ImageIcon image2 = new ImageIcon("img/image2.png");
-        ImageIcon image3 = new ImageIcon("img/image3.png");
-        ImageIcon image4 = new ImageIcon("img/image4.png");
-        ImageIcon image5 = new ImageIcon("img/image5.png");
-        ImageIcon image6 = new ImageIcon("img/image6.png");
-        ImageIcon image7 = new ImageIcon("img/image7.png");
-        ImageIcon image8 = new ImageIcon("img/image8.png");
-        ImageIcon image9 = new ImageIcon("img/image9.png");
+        ImageIcon image1 = new ImageIcon("img/Img1.png");
+        ImageIcon image2 = new ImageIcon("img/Img2.png");
+        ImageIcon image3 = new ImageIcon("img/Img3.png");
+        ImageIcon image4 = new ImageIcon("img/Img4.png");
+        ImageIcon image5 = new ImageIcon("img/Img5.png");
+        ImageIcon image6 = new ImageIcon("img/Img6.png");
+        ImageIcon image7 = new ImageIcon("img/Img7.png");
+        ImageIcon image8 = new ImageIcon("img/Img8.png");
+        ImageIcon image9 = new ImageIcon("img/Img9.png");
         ImageIcon image10 = new ImageIcon("img/image10.png");
 
-        ImageIcon[] buttonImages = { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10 };
+        ImageIcon[] buttonImages = {image1, image2, image3, image4, image5, image6, image7, image8, image9, image10};
 
         for (int i = 1; i <= 10; i++) {
             JButton levelButton = new JButton();
@@ -127,20 +122,21 @@ public class Start {
             buttonPanel.add(levelLabel, BorderLayout.NORTH);
             buttonPanel.add(levelButton, BorderLayout.CENTER);
 
+            final int level = i; 
+
             levelButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    SudokuUI_4x4.main(null);
+                    selectGameMode(level);
                     frame.setVisible(false);
                 }
             });
+
             levelPanel1.add(buttonPanel);
         }
 
         frame.add(levelPanel1, BorderLayout.CENTER);
 
-
-        // Start New Game Button
         JButton newGameButton = new JButton("Start a New Game");
         newGameButton.setFont(new Font("Arial", Font.BOLD, 24));
         newGameButton.setPreferredSize(new Dimension(300, 75));
@@ -151,7 +147,7 @@ public class Start {
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SudokuUI_9x9.main(null);
+                selectGameMode(9); 
                 frame.setVisible(false);
             }
         });
@@ -164,6 +160,22 @@ public class Start {
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
+    }
+
+    /**
+     * Method to select the game mode based on the selected level.
+     *
+     * @param level The selected level.
+     */
+    private static void selectGameMode(int level) {
+        // Logic to select game mode based on the level
+        if (level >= 1 && level <= 4) {
+            SudokuUI_4x4.main(null);
+        } else if (level >= 5 && level <= 8) {
+            SudokuUI_9x9.main(null);
+        } else {
+            SudokuUI_9x9.main(null);
+        }
     }
 }
 
