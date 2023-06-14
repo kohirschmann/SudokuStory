@@ -20,9 +20,9 @@ public class Start {
          * Uses a dialog box to display the prompt.
          */
         public static void changeUsername() {
-            UIManager.put("OptionPane.background", Color.WHITE);
-            UIManager.put("Panel.background", Color.WHITE);
-            ImageIcon ff = Scaling.Icon(new ImageIcon("img/Tiger-cage.png"));
+            UIManager.put("OptionPane.background", new Color(160, 216, 144));
+            UIManager.put("Panel.background", new Color (160, 216, 144));
+            ImageIcon ff = Scaling.Icon(new ImageIcon("img/Tiger_zoo_per.png"));
             Object input = JOptionPane.showInputDialog(null, "Welcome, what is your name?", "Choose Username", JOptionPane.PLAIN_MESSAGE, ff, null, null);
             username = input.toString();
 
