@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * SudokuUI_9x9 class provides a graphical user interface (GUI) for a 9x9 Sudoku game.
+ * It supports functionalities like puzzle generation, solution checking, providing hints, and time tracking.
+ *
+ */
 public class SudokuUI_9x9 {
     private static final int GRID_SIZE = 9;
     private JTextField[][] fields = new JTextField[GRID_SIZE][GRID_SIZE];
@@ -16,8 +21,7 @@ public class SudokuUI_9x9 {
     private JLabel timerLabel;
     private int minutesPassed;
     private int hoursPassed;
-    private int difficulty_option;
-    float correctness;
+    
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(SudokuUI_9x9::new);
@@ -27,7 +31,7 @@ public class SudokuUI_9x9 {
         JFrame frame = new JFrame(Window_settings.getFrameName());
         Window_settings.Tab(frame);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setSize(1200, 900);
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -95,32 +99,13 @@ public class SudokuUI_9x9 {
                             solutionBoard[i] = board[i].clone();
                         }
                         if(Sudoku_solver.solve_sudoku(solutionBoard)) {
-                        	if(difficulty_option == 1) {
-                            float correctness = Sudoku_corrector.getCorrectness(board, solutionBoard,difficulty_option); 
-                            showCorrectnessDialog(correctness,board,solutionBoard);
+                       
                             resetGrid(); 
                             resettimer();
                             timer.start();
-                        	}
+                        	
                         }
-                        if(Sudoku_solver.solve_sudoku(solutionBoard)) {
-                        	if(difficulty_option == 2) {
-                            correctness = Sudoku_corrector.getCorrectness(board, solutionBoard,difficulty_option); 
-                            showCorrectnessDialog(correctness,board,solutionBoard);
-                            resetGrid(); 
-                            resettimer();
-                            timer.start();
-                        	}
-                        }
-                        if(Sudoku_solver.solve_sudoku(solutionBoard)) {
-                        	if(difficulty_option == 3) {
-                            float correctness = Sudoku_corrector.getCorrectness(board, solutionBoard,difficulty_option); 
-                            showCorrectnessDialog(correctness,board,solutionBoard);
-                            resetGrid(); 
-                            resettimer();
-                            timer.start();
-                        	}
-                        }
+                      
                     }
                 } else {
                     int[][] solutionBoard = new int[GRID_SIZE][GRID_SIZE];
@@ -128,18 +113,12 @@ public class SudokuUI_9x9 {
                         solutionBoard[i] = board[i].clone();
                     }
                     if(Sudoku_solver.solve_sudoku(solutionBoard)) {
-                        float correctness = Sudoku_corrector.getCorrectness(board, solutionBoard,difficulty_option);
-                        if (correctness == 100.0) {
-                            JOptionPane.showMessageDialog(null, "Congratulations! Your solution is correct!");
+                     
+                            JOptionPane.showMessageDialog(null, "Congratulations! You completed!");
                             resetGrid(); 
                             resettimer();
                             timer.start();
-                            Story.TigerStorynGame();
-                        } else {
-                            showCorrectnessDialog(correctness,board,solutionBoard);
-                            Story.TigerStorynGame();
-                            frame.dispose();
-                        }
+                       
                     }
                 }
             }
@@ -395,12 +374,9 @@ public class SudokuUI_9x9 {
         }
         checkzero();
     }
-
-    private void showCorrectnessDialog(float correctness,int [][] board,int [][] solutionboard) {
-        correctness = Sudoku_corrector.getCorrectness(board, solutionboard, difficulty_option);
-        JOptionPane.showMessageDialog(null, "Your correctness: " + correctness + "%");
-    }
-
+    /**
+     * This method is used to update the timer label.
+     */
     private void updateTimerLabel() {
         timerLabel.setText("Time Passed: " + hoursPassed + " h " + minutesPassed+ " min " + secondsPassed + " s");
         if (secondsPassed == 60) {
@@ -412,32 +388,41 @@ public class SudokuUI_9x9 {
         	hoursPassed ++;
         }
     }
-   private void setGridColors() {
-   	String[] colorCodes = {"#65B952", "#2B70AA"};
-	int gridIndex = 0;
-    	for (int i = 0; i < GRID_SIZE; i += 3) {
-       		for (int j = 0; j < GRID_SIZE; j += 3) {
-            		String colorCode = colorCodes[gridIndex % colorCodes.length];
-            		gridIndex++;
+    /**
+     * This method is used to set grid colors.
+     */
+    private void setGridColors() {
+       	String[] colorCodes = {"#65B952", "#2B70AA"};
+    	int gridIndex = 0;
+        	for (int i = 0; i < GRID_SIZE; i += 3) {
+           		for (int j = 0; j < GRID_SIZE; j += 3) {
+                		String colorCode = colorCodes[gridIndex % colorCodes.length];
+                		gridIndex++;
 
-            		Color color = Color.decode(colorCode);
+                		Color color = Color.decode(colorCode);
 
-            		for (int row = i; row < i + 3; row++) {
-                		for (int col = j; col < j + 3; col++) {
-                    			gridColors[row][col] = color;
+                		for (int row = i; row < i + 3; row++) {
+                    		for (int col = j; col < j + 3; col++) {
+                        			gridColors[row][col] = color;
+                    }
                 }
             }
         }
     }
-}
-
+    /**
+     * This method is used to apply formatting to each cell.
+     * @param textField This is the text field representing a cell.
+     */
     private void setCellFormatting(JTextField textField) {
         Font font = textField.getFont();
         Font largerBoldFont = font.deriveFont(font.getSize() + 8f).deriveFont(Font.BOLD);
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setFont(largerBoldFont);
 }
-   
+    /**
+     * This method iterates over the entire grid and updates the background color of each cell according
+     * to the colors stored in the 'gridColors' array.
+     */
     private void updateGridColors() {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
@@ -445,6 +430,11 @@ public class SudokuUI_9x9 {
             }
         }
     }
+    /**
+     * This method checks each cell in the grid for a value of zero. If it finds a cell with a zero, it
+     * replaces the zero with an empty string. This is likely used to clean up the UI presentation of 
+     * the grid.
+     */
     private void checkzero() {
     	for (int i = 0; i < GRID_SIZE; i ++) {
     		for (int j = 0; j < GRID_SIZE; j++) {
@@ -460,6 +450,12 @@ public class SudokuUI_9x9 {
             }
         }
     }
+    /**
+     * This method resets the entire grid to its initial state. It first makes all cells editable and 
+     * clears their contents, then it generates a new Sudoku puzzle and fills the grid with its values, 
+     * setting the cells with initial values to uneditable. 
+     * After filling the grid, it checks for and removes any zeros.
+     */
     private void resetGrid() {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
@@ -479,6 +475,11 @@ public class SudokuUI_9x9 {
         }
         checkzero();
     }
+    /**
+     * This method is used to reset the timer that's likely used to track the time a user takes to solve
+     * the Sudoku puzzle. It first checks if a timer exists, and if it does, it stops the timer and
+     * resets the time variables (secondsPassed, minutesPassed, hoursPassed) back to zero.
+     */
     protected void resettimer() {
     	if (timer != null) {
     		timer.stop();
