@@ -114,9 +114,9 @@ public class SudokuUI_4x4{
                     float correctness = Sudoku_corrector_4x4.getCorrectness(board, solutionBoard);
                     if (correctness == 100.0) {
                         JOptionPane.showMessageDialog(null, "Congratulations! Your solution is correct!");
-                        resetGrid(); 
-                        resettimer();
-                        timer.start();
+                        Story.TigerStorynGame();
+                        frame.dispose();
+                        //Start.MainMenu();
                     } else {
                         showCorrectnessDialog(correctness,board,solutionBoard);
                     }

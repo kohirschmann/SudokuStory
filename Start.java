@@ -1,55 +1,33 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 /**
- * This class represents the main entry point of the StorySudoku game.
- * It provides a graphical user interface (GUI) where the user can interact with the game.
- * The GUI displays a welcome message, an explanation of the game, and level selection options.
- * The user can choose a level and start a new game.
+ * The `Start` class serves as the main entry point of the application.
+ * It creates a graphical user interface (GUI) that welcomes the user and introduces the game.
+ * The GUI includes a greeting section, a level selection section, and a "Start New Game" button.
+ * This class utilizes other classes such as `User`, `Window_settings`, `Level`, and `SudokuUI_9x9`.
  */
 public class Start {
-    /**
-     * This nested class represents a user in the game.
-     * It provides functionality to change the user's username and retrieve the current username.
-     */
-    static class User {
-        static String username;
-        /**
-         * Prompts the user to enter their name and sets it as the username.
-         * Uses a dialog box to display the prompt.
-         */
-        public static void changeUsername() {
-            UIManager.put("OptionPane.background", new Color (160, 216, 144));
-            UIManager.put("Panel.background", new Color (160, 216, 144));
-            ImageIcon ff = Scaling.Icon(new ImageIcon("img/Tiger-only.png"));
-            Object input = JOptionPane.showInputDialog(null, "Welcome, what is your name?", "Choose Username", JOptionPane.PLAIN_MESSAGE, ff, null, null);
-            username = input.toString();
+	static JFrame frame;
 
-            UIManager.put("OptionPane.background", null);
-            UIManager.put("Panel.background", null);
-        }
-        /**
-         * Retrieves the current username.
-         *
-         * @return The username of the user.
-         */
-        public static String getName() {
-            return username;
-        }
-    }
+    static ImageIcon tigerImage = new ImageIcon("Zoo_Story/image12.png");
 
-    static ImageIcon tigerImage = new ImageIcon("img/Tiger-only.png");
     /**
-     * The main method that starts the game and initializes the graphical user interface.
+     * Main method which sets up the GUI for the application.
+     * The GUI consists of a frame with a greeting panel at the top,
+     * a level selection panel at the center, and a "Start New Game" button at the bottom.
+     * Each level button in the level selection panel is associated with a different image and 
+     * a different action event, which starts the corresponding level of the game.
      *
-     * @param args The command-line arguments (not used).
+     * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
         User.changeUsername();
-        JFrame frame = new JFrame(Window_settings.getFrameName());
+        frame = new JFrame(Window_settings.getFrameName());
         Window_settings.Tab(frame);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.setSize(1200, 900);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.getContentPane().setBackground(new Color(160, 216, 144));
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -59,6 +37,7 @@ public class Start {
         });
         frame.setLayout(new BorderLayout());
 
+        // Greeting and Explanation
         JPanel greetingPanel = new JPanel();
         greetingPanel.setLayout(new BorderLayout());
         greetingPanel.setBackground(new Color(160, 216, 144));
@@ -77,26 +56,29 @@ public class Start {
 
         frame.add(greetingPanel, BorderLayout.NORTH);
 
+        // Level Selection
         JPanel levelPanel = new JPanel(new GridLayout(2, 5, 20, 20));
         levelPanel.setBackground(new Color(160, 216, 144));
         levelPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
+        // Button Images
         JPanel levelPanel1 = new JPanel(new GridLayout(2, 5, 20, 20));
         levelPanel1.setBackground(new Color(160, 216, 144));
         levelPanel1.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
-        ImageIcon image1 = new ImageIcon("img/Img1.png");
-        ImageIcon image2 = new ImageIcon("img/Img2.png");
-        ImageIcon image3 = new ImageIcon("img/Img3.png");
-        ImageIcon image4 = new ImageIcon("img/Img4.png");
-        ImageIcon image5 = new ImageIcon("img/Img5.png");
-        ImageIcon image6 = new ImageIcon("img/Img6.png");
-        ImageIcon image7 = new ImageIcon("img/Img7.png");
-        ImageIcon image8 = new ImageIcon("img/Img8.png");
-        ImageIcon image9 = new ImageIcon("img/Img9.png");
-        ImageIcon image10 = new ImageIcon("img/image10.png");
+        // Button Images
+        ImageIcon image1 = new ImageIcon("img/Story_1.jpeg");
+        ImageIcon image2 = new ImageIcon("img/Story_2.jpeg");
+        ImageIcon image3 = new ImageIcon("img/Story_3.jpeg");
+        ImageIcon image4 = new ImageIcon("img/Story_4.jpeg");
+        ImageIcon image5 = new ImageIcon("img/Story_5.jpeg");
+        ImageIcon image6 = new ImageIcon("img/Story_6.jpeg");
+        ImageIcon image7 = new ImageIcon("img/Story_7.jpeg");
+        ImageIcon image8 = new ImageIcon("img/Story_8.jpeg");
+        ImageIcon image9 = new ImageIcon("img/Story_9.jpeg");
+        ImageIcon image10 = new ImageIcon("img/Story_10.jpeg");
 
-        ImageIcon[] buttonImages = {image1, image2, image3, image4, image5, image6, image7, image8, image9, image10};
+        ImageIcon[] buttonImages = { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10 };
 
         for (int i = 1; i <= 10; i++) {
             JButton levelButton = new JButton();
@@ -121,22 +103,20 @@ public class Start {
             levelLabel.setHorizontalAlignment(JLabel.CENTER);
             buttonPanel.add(levelLabel, BorderLayout.NORTH);
             buttonPanel.add(levelButton, BorderLayout.CENTER);
-
-            final int level = i; 
-
+            final int level = i;
             levelButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    selectGameMode(level);
-                    frame.setVisible(false);
+                	Level.selectLevel(level);
                 }
             });
-
             levelPanel1.add(buttonPanel);
         }
 
         frame.add(levelPanel1, BorderLayout.CENTER);
 
+
+        // Start New Game Button
         JButton newGameButton = new JButton("Start a New Game");
         newGameButton.setFont(new Font("Arial", Font.BOLD, 24));
         newGameButton.setPreferredSize(new Dimension(300, 75));
@@ -145,9 +125,8 @@ public class Start {
         newGameButton.setBorder(BorderFactory.createLineBorder(new Color(56, 97, 43), 3));
         newGameButton.setFocusPainted(false);
         newGameButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
-                selectGameMode(9); 
+            	SudokuUI_9x9.main(null);
                 frame.setVisible(false);
             }
         });
@@ -161,22 +140,14 @@ public class Start {
 
         frame.setVisible(true);
     }
-
     /**
-     * Method to select the game mode based on the selected level.
-     *
-     * @param level The selected level.
+     * Sets the main menu visibility to true, making the main menu visible again.
+     * This method is typically called after a game session is completed, or when a game session is exited before completion.
      */
-    private static void selectGameMode(int level) {
-        // Logic to select game mode based on the level
-        if (level >= 1 && level <= 4) {
-            SudokuUI_4x4.main(null);
-        } else if (level >= 5 && level <= 8) {
-            SudokuUI_9x9.main(null);
-        } else {
-            SudokuUI_9x9.main(null);
-        }
+    public static void MainMenu() {
+    	frame.setVisible(true);
     }
+    
 }
 
 
