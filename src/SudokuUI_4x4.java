@@ -85,8 +85,8 @@ public class SudokuUI_4x4{
                 }
             }
             if (!isComplete) {
-                String[] options = {"Yes, I give up", "No, one more try!"};
-                int result = JOptionPane.showOptionDialog(null, "Seems not completed, do you want to stay longer?",
+                String[] options = {"Yes", "No"};
+                int result = JOptionPane.showOptionDialog(null, "Not completed, another try?",
                         "Incomplete Puzzle",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                         null, options, options[0]);
                 if (result == 0) {
@@ -129,8 +129,8 @@ public class SudokuUI_4x4{
     button1.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String[] options = {"Yes, I don't have any idea", "No, let me consider..."};
-            int result = JOptionPane.showOptionDialog(null, "Any problems? Do you really want a new template?", 
+            String[] options = {"Yes", "No"};
+            int result = JOptionPane.showOptionDialog(null, "Do you want to restart a new game?", 
                     "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                     null, options, options[0]);
                     if (result == 0) {
