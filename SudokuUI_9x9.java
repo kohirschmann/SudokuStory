@@ -89,8 +89,8 @@ public class SudokuUI_9x9 {
                     }
                 }
                 if (!isComplete) {
-                    String[] options = {"Yes, I give up", "No, one more try!"};
-                    int result = JOptionPane.showOptionDialog(null, "Seems not completed, do you want to stay longer?",
+                    String[] options = {"Yes", "No"};
+                    int result = JOptionPane.showOptionDialog(null, "Not completed, another try?",
                             "Incomplete Puzzle",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                             null, options, options[0]);
                     if (result == 0) {
@@ -128,8 +128,8 @@ public class SudokuUI_9x9 {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] options = {"Yes, I don't have any idea", "No, let me consider..."};
-                int result = JOptionPane.showOptionDialog(null, "Any problems? Do you really want a new template?", 
+                String[] options = {"Yes", "No"};
+                int result = JOptionPane.showOptionDialog(null, "Do you want to restart a new game?", 
                         "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                         null, options, options[0]);
                         if (result == 0) {
@@ -212,8 +212,8 @@ public class SudokuUI_9x9 {
         beginner.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	String [] options = {"Not so bad to be a cute baby!","OK...let me consider..."};
-            	int result = JOptionPane.showOptionDialog(null, "Serious? Baby Mode?", 
+            	String [] options = {"Yes","No"};
+            	int result = JOptionPane.showOptionDialog(null, "Switch to 4x4 puzzle?", 
                         "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                         null, options, options[0]);
             	if (result == 0) {
@@ -229,8 +229,8 @@ public class SudokuUI_9x9 {
         easy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	String [] options = {"Yes, let's start this level!","OK...let me consider..."};
-            	int result = JOptionPane.showOptionDialog(null, "Any problems? Do you really want a new template?", 
+            	String [] options = {"Yes","No"};
+            	int result = JOptionPane.showOptionDialog(null, "Switch to easy level?", 
                         "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                         null, options, options[0]);
             	if (result == 0) {
@@ -258,8 +258,8 @@ public class SudokuUI_9x9 {
         medium.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	String [] options = {"Yes, let's start this level!","OK...let me consider..."};
-            	int result = JOptionPane.showOptionDialog(null, "Any problems? Do you really want a new template?", 
+            	String [] options = {"Yes","No"};
+            	int result = JOptionPane.showOptionDialog(null, "Switch to medium level?", 
                         "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                         null, options, options[0]);
             	if (result == 0) {
@@ -285,8 +285,8 @@ public class SudokuUI_9x9 {
         JButton hard = new JButton("Hard");
         hard.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {String [] options = {"Yes, let's start this level!","OK...let me consider..."};
-        	int result = JOptionPane.showOptionDialog(null, "Any problems? Do you really want a new template?", 
+            public void actionPerformed(ActionEvent e) {String [] options = {"Yes","No"};
+        	int result = JOptionPane.showOptionDialog(null, "Switch to hard level?", 
                     "Regenerate Puzzle", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
                     null, options, options[0]);
         	if (result == 0) {

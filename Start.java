@@ -67,16 +67,16 @@ public class Start {
         levelPanel1.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
         // Button Images
-        ImageIcon image1 = new ImageIcon("img/Story_1.jpeg");
-        ImageIcon image2 = new ImageIcon("img/Story_2.jpeg");
-        ImageIcon image3 = new ImageIcon("img/Story_3.jpeg");
-        ImageIcon image4 = new ImageIcon("img/Story_4.jpeg");
-        ImageIcon image5 = new ImageIcon("img/Story_5.jpeg");
-        ImageIcon image6 = new ImageIcon("img/Story_6.jpeg");
-        ImageIcon image7 = new ImageIcon("img/Story_7.jpeg");
-        ImageIcon image8 = new ImageIcon("img/Story_8.jpeg");
-        ImageIcon image9 = new ImageIcon("img/Story_9.jpeg");
-        ImageIcon image10 = new ImageIcon("img/Story_10.jpeg");
+        ImageIcon image1 = new ImageIcon("pic/1.png");
+        ImageIcon image2 = new ImageIcon("pic/2.png");
+        ImageIcon image3 = new ImageIcon("pic/3.png");
+        ImageIcon image4 = new ImageIcon("pic/4.png");
+        ImageIcon image5 = new ImageIcon("pic/5.png");
+        ImageIcon image6 = new ImageIcon("pic/6.png");
+        ImageIcon image7 = new ImageIcon("pic/7.png");
+        ImageIcon image8 = new ImageIcon("pic/8.png");
+        ImageIcon image9 = new ImageIcon("pic/9.png");
+        ImageIcon image10 = new ImageIcon("pic/10.png");
 
         ImageIcon[] buttonImages = { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10 };
 

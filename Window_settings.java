@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
  */
 public class Window_settings {
 	
-	private static String FrameName = "Call of Soduko";
+	private static String FrameName = "Sudoku Story";
 	/**
      * Method to set the tab properties of the application window.
      * It sets the icon for the application tab.
